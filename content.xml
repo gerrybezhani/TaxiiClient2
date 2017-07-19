@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stix:STIX_Package
+    id="gerry:package-eabaee24-7c9a-4435-8b44-2f9114c40680"
+    timestamp="2017-06-17T11:40:28.848Z" version="1.2"
+    xmlns="http://xml/metadataSharing.xsd"
+    xmlns:coa="http://stix.mitre.org/CourseOfAction-1"
+    xmlns:et="http://stix.mitre.org/ExploitTarget-1"
+    xmlns:gerry="gerry.ptyxiaki.it.teithe"
+    xmlns:stix="http://stix.mitre.org/stix-1"
+    xmlns:stixCommon="http://stix.mitre.org/common-1" xmlns:ttp="http://stix.mitre.org/TTP-1">
+    <stix:STIX_Header>
+        <stix:Description>CVE exploit</stix:Description>
+    </stix:STIX_Header>
+    <stix:TTPs>
+        <stix:TTP xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ttp:TTPType">
+            <ttp:Behavior>
+                <ttp:Attack_Patterns>
+                    <ttp:Attack_Pattern>
+                        <ttp:Description>An attacker on the same network as, or who can otherwise affect network traffic from, a Samsung Magician user can cause the Magician update process to execute arbitrary code with system administrator privileges.</ttp:Description>
+                    </ttp:Attack_Pattern>
+                </ttp:Attack_Patterns>
+            </ttp:Behavior>
+            <ttp:Victim_Targeting>
+                <ttp:Identity>
+                    <stixCommon:Name>  Vendor : Samsung Memory| Status : Affected| Date Notified : 24 Apr 2017| Date Updated : 15 Jun 2017|</stixCommon:Name>
+                </ttp:Identity>
+            </ttp:Victim_Targeting>
+            <ttp:Exploit_Targets>
+                <ttp:Exploit_Target>
+                    <stixCommon:Exploit_Target xsi:type="et:ExploitTargetType">
+                        <et:Vulnerability>
+                            <et:Title>Samsung Magician fails to update itself securely</et:Title>
+                            <et:Description>Samsung Magician is a management utility for Samsung SSDs. Prior to version 5.0, Samsung Magician checks for and retrieves updates over HTTP. Prior to version 5.1, Samsung Magician uses HTTPS to perform update operations, however it does not validate SSL certificates.</et:Description>
+                            <et:Short_Description/>
+                            <et:CVE_ID>CVE-2017-3218</et:CVE_ID>
+                            <et:CVSS_Score>
+                                <et:Base_Score>8.3</et:Base_Score>
+                                <et:Base_Vector>AV:A/AC:L/Au:N/C:C/I:C/A:C</et:Base_Vector>
+                                <et:Temporal_Score>6.5</et:Temporal_Score>
+                                <et:Temporal_Vector>E:POC/RL:OF/RC:C</et:Temporal_Vector>
+                                <et:Environmental_Score>4.9</et:Environmental_Score>
+                                <et:Environmental_Vector>CDP:ND/TD:M/CR:ND/IR:ND/AR:ND</et:Environmental_Vector>
+                            </et:CVSS_Score>
+                            <et:Published_DateTime>2017-06-15T00:00:00.000+03:00</et:Published_DateTime>
+                            <et:References>
+                                <stixCommon:Reference>https://vuls.cert.org/confluence/display/tools/CERT+Tapioca https://www.samsung.com/semiconductor/minisite/ssd/product/consumer/magician.html http://www.samsung.com/semiconductor/minisite/ssd/download/tools.html</stixCommon:Reference>
+                            </et:References>
+                        </et:Vulnerability>
+                        <et:Potential_COAs>
+                            <et:Potential_COA>
+                                <stixCommon:Course_Of_Action xsi:type="coa:CourseOfActionType">
+                                    <coa:Description>Apply an update This issue is addressed in Samsung Magician 5.1. Note that because the update mechanism is vulnerable, do not use the self-update mechanism for Samsung Magician to obtain the fixed version.</coa:Description>
+                                </stixCommon:Course_Of_Action>
+                            </et:Potential_COA>
+                        </et:Potential_COAs>
+                        <et:Information_Source>
+                            <stixCommon:Description>This vulnerability was reported by Will Dormann of the CERT/CC.</stixCommon:Description>
+                        </et:Information_Source>
+                    </stixCommon:Exploit_Target>
+                </ttp:Exploit_Target>
+            </ttp:Exploit_Targets>
+        </stix:TTP>
+    </stix:TTPs>
+</stix:STIX_Package>
