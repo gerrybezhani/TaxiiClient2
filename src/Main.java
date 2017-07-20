@@ -21,6 +21,56 @@ public class Main {
 
     }
 
+    public static void inbox()
+    {
+        System.out.println("=================INBOX=================");
+        System.out.println(" Content binding of the Content\n" +
+                "Block to send. Defaults to\n" +
+                "urn:stix.mitre.org:xml:1.1.1'");
+        System.out.println("The subtype of the Content Binding.Defaults to none");
+        System.out.println("REQUIRED. File containing the\n" +
+                "content of the Content Block to send.");
+        System.out.println(" The Destination Collection Name for\n" +
+                "this Inbox Message. Defaults to\n" +
+                "none.(optional)");
+        System.out.println(" REQUIRED. The URL of the TAXII service provider" +
+                "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
+        System.out.println("Username to authenticate with(optional):");
+        System.out.println("password to authenticate with(optional):");
+        System.out.println("A proxy to use(optional):");
+
+
+    }
+
+    //method for feeinfo,discovery,collectionifno
+    public static void other()
+    {
+        System.out.println("=================DISCOVER=================");
+        System.out.println(" REQUIRED. The URL of the TAXII service provider" +
+                "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
+        System.out.println("Username to authenticate with(optional):");
+        System.out.println("password to authenticate with(optional):");
+        System.out.println("A proxy to use(optional):");
+    }
+
+    public static void fullfilment()
+    {
+        System.out.println("=================DISCOVER=================");
+        System.out.println("Data Collection that this Fulfillment request\n" +
+                "applies to. Defaults to 'default'.");
+        System.out.println("The result_id being requested.");
+        System.out.println("The part number being requested. Defaults to '1'.");
+        System.out.println(" REQUIRED. The URL of the TAXII service provider" +
+                "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
+        System.out.println("Username to authenticate with(optional):");
+        System.out.println("password to authenticate with(optional):");
+        System.out.println("A proxy to use(optional):");
+    }
+
+
+
+
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
