@@ -1,4 +1,4 @@
-import org.mitre.taxii.client.example.PollClient;
+import org.mitre.taxii.client.example.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,8 +16,8 @@ public class Main {
         System.out.println(" The begin timestamp (format:\n" +
                 "YYYY-MM-DDTHH:MM:SS.ssssss+/-hh:mm) for the poll\n" +
                 " request. Defaults to none.(optional)");
-        String btime = sc.next();
-        if(btime != null)
+        String btime = sc.nextLine();
+        if(!btime.isEmpty())
         {
             tmpAr.add("-begin_timestamp");
             tmpAr.add(btime);
@@ -27,8 +27,8 @@ public class Main {
                 "YYYY-MM-DDTHH:MM:SS.ssssss+/-hh:mm) for the poll\n" +
                 "request. Defaults to none.(optional)");
 
-        String etime = sc.next();
-        if(etime != null)
+        String etime = sc.nextLine();
+        if(!etime.isEmpty())
         {
             tmpAr.add("-end_timestamp");
             tmpAr.add(etime);
@@ -36,8 +36,8 @@ public class Main {
 
         System.out.println("Data Collection to poll. Defaults to 'default'.(optional)");
 
-        String collection = sc.next();
-        if(collection != null)
+        String collection = sc.nextLine();
+        if(!collection.isEmpty())
         {
             tmpAr.add("-collection");
             tmpAr.add(collection);
@@ -48,32 +48,32 @@ public class Main {
 
         String  url;
         do{
-            url = sc.next();
-        }while (url == null );
+            url = sc.nextLine();
+        }while (url.isEmpty() );
         tmpAr.add("-u");
         tmpAr.add(url);
 
         System.out.println("Username to authenticate with(optional):");
-        String uname = sc.next();
-        if(uname != null)
+        String uname = sc.nextLine();
+        if(!uname.isEmpty())
         {
-            tmpAr.add("-u");
+            tmpAr.add("-username");
             tmpAr.add(uname);
         }
 
 
         System.out.println("password to authenticate with(optional):");
 
-        String pass = sc.next();
-        if(pass != null)
+        String pass = sc.nextLine();
+        if(!pass.isEmpty())
         {
             tmpAr.add("-pass");
             tmpAr.add(pass);
         }
         System.out.println("A proxy to use(optional):");
 
-        String proxy = sc.next();
-        if(proxy != null)
+        String proxy = sc.nextLine();
+        if(!proxy.isEmpty())
         {
             tmpAr.add("-proxy");
             tmpAr.add(proxy);
@@ -90,53 +90,233 @@ public class Main {
 
     public static void inbox()
     {
+        ArrayList<String> tmpAr = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("=================INBOX=================");
         System.out.println(" Content binding of the Content\n" +
                 "Block to send. Defaults to\n" +
                 "urn:stix.mitre.org:xml:1.1.1'");
+
+        String cbind = sc.nextLine();
+        if(!cbind.isEmpty())
+        {
+            tmpAr.add("-content_binding");
+            tmpAr.add(cbind);
+        }
+
         System.out.println("The subtype of the Content Binding.Defaults to none");
+        String subtype = sc.nextLine();
+        if(!subtype.isEmpty())
+        {
+            tmpAr.add("-subtype");
+            tmpAr.add(subtype);
+        }
         System.out.println("REQUIRED. File containing the\n" +
                 "content of the Content Block to send.");
+
+        String  file;
+        do{
+            file = sc.nextLine();
+        }while (file.isEmpty() );
+        tmpAr.add("-content_file");
+        tmpAr.add(file);
+
+
         System.out.println(" The Destination Collection Name for\n" +
                 "this Inbox Message. Defaults to\n" +
                 "none.(optional)");
+        String dcn = sc.nextLine();
+        if(!dcn.isEmpty())
+        {
+            tmpAr.add("-dcn");
+            tmpAr.add(dcn);
+        }
+
         System.out.println(" REQUIRED. The URL of the TAXII service provider" +
                 "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
+        String  url;
+        do{
+            url = sc.nextLine();
+        }while (url.isEmpty() );
+        tmpAr.add("-u");
+        tmpAr.add(url);
+
         System.out.println("Username to authenticate with(optional):");
+        String uname = sc.nextLine();
+        if(!uname.isEmpty())
+        {
+            tmpAr.add("-username");
+            tmpAr.add(uname);
+        }
+
+
         System.out.println("password to authenticate with(optional):");
+
+        String pass = sc.nextLine();
+        if(!pass.isEmpty())
+        {
+            tmpAr.add("-pass");
+            tmpAr.add(pass);
+        }
         System.out.println("A proxy to use(optional):");
+
+        String proxy = sc.nextLine();
+        if(!proxy.isEmpty())
+        {
+            tmpAr.add("-proxy");
+            tmpAr.add(proxy);
+        }
+
+        String[] argsAr = new String[tmpAr.size()];
+        for (int i = 0; i < tmpAr.size(); i++) {
+            argsAr[i] = tmpAr.get(i);
+        }
+
+        InboxClient.main(argsAr);
+
+
 
 
     }
 
-    //method for feeinfo,discovery,collectionifno
-    public static void other()
+    //method for feedinfo,discovery,collectionifno
+    public static void other(String method)
     {
+        ArrayList<String> tmpAr = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
         System.out.println("=================DISCOVER=================");
         System.out.println(" REQUIRED. The URL of the TAXII service provider" +
                 "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
+        String  url;
+        do{
+            url = sc.nextLine();
+        }while (url.isEmpty() );
+        tmpAr.add("-u");
+        tmpAr.add(url);
+
         System.out.println("Username to authenticate with(optional):");
+        String uname = sc.nextLine();
+        if(!uname.isEmpty())
+        {
+            tmpAr.add("-username");
+            tmpAr.add(uname);
+        }
+
+
         System.out.println("password to authenticate with(optional):");
+
+        String pass = sc.nextLine();
+        if(!pass.isEmpty())
+        {
+            tmpAr.add("-pass");
+            tmpAr.add(pass);
+        }
         System.out.println("A proxy to use(optional):");
+
+        String proxy = sc.nextLine();
+        if(!proxy.isEmpty())
+        {
+            tmpAr.add("-proxy");
+            tmpAr.add(proxy);
+        }
+
+        String[] argsAr = new String[tmpAr.size()];
+        for (int i = 0; i < tmpAr.size(); i++) {
+            argsAr[i] = tmpAr.get(i);
+        }
+
+
+        if(method.equals("DISCOVER"))
+        {
+            DiscoveryClient.main(argsAr);
+        }
+        else if(method.equals("COLLECTION INFO"))
+        {
+            CollectionInformationClient.main(argsAr);
+        }
+        else if(method.equals("FEED INFO"))
+        {
+            FeedInformationClient10.main(argsAr);
+        }
     }
 
     public static void fullfilment()
     {
+        ArrayList<String> tmpAr = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+
         System.out.println("=================DISCOVER=================");
         System.out.println("Data Collection that this Fulfillment request\n" +
                 "applies to. Defaults to 'default'.");
+        String dcn = sc.nextLine();
+        if(!dcn.isEmpty())
+        {
+            tmpAr.add("-collection");
+            tmpAr.add(dcn);
+        }
+
         System.out.println("The result_id being requested.");
+        String rid = sc.nextLine();
+        if(!rid.isEmpty())
+        {
+            tmpAr.add("-result_id");
+            tmpAr.add(rid);
+        }
         System.out.println("The part number being requested. Defaults to '1'.");
+        String pnumber = sc.nextLine();
+
+        if(!pnumber.isEmpty())
+        {
+            tmpAr.add("-result_part_number");
+            tmpAr.add(pnumber);
+        }
         System.out.println(" REQUIRED. The URL of the TAXII service provider" +
                 "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
+        String  url;
+        do{
+            url = sc.nextLine();
+        }while (url.isEmpty() );
+        tmpAr.add("-u");
+        tmpAr.add(url);
+
         System.out.println("Username to authenticate with(optional):");
+        String uname = sc.nextLine();
+        if(!uname.isEmpty())
+        {
+            tmpAr.add("-username");
+            tmpAr.add(uname);
+        }
+
+
         System.out.println("password to authenticate with(optional):");
+
+        String pass = sc.nextLine();
+        if(!pass.isEmpty())
+        {
+            tmpAr.add("-pass");
+            tmpAr.add(pass);
+        }
         System.out.println("A proxy to use(optional):");
+
+        String proxy = sc.nextLine();
+        if(!proxy.isEmpty())
+        {
+            tmpAr.add("-proxy");
+            tmpAr.add(proxy);
+        }
+
+        String[] argsAr = new String[tmpAr.size()];
+        for (int i = 0; i < tmpAr.size(); i++) {
+            argsAr[i] = tmpAr.get(i);
+        }
+
+        FulfillmentClient.main(argsAr);
     }
 
     public static void help()
     {
-
+        //help to be completed
     }
 
 
@@ -160,13 +340,13 @@ public class Main {
                 inbox();
                 break;
             case 3:
-                other();
+                other("DISCOVER");
                 break;
             case 4:
-                other();
+                other("COLLECTION INFO");
                 break;
             case 5:
-                other();
+                other("FEED INFO");
                 break;
             case 6:
                 fullfilment();
