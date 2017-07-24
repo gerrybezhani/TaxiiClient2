@@ -326,36 +326,45 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("=================TAXII CLIENT=================");
-        System.out.println("1.POLL \n2.INBOX \n3.DISCOVER \n4.COLLECTION INFO \n" +
-                "5.FEED INFO \n6.FULLFILMENT \n7.HELP");
 
-        int choice = sc.nextInt();
 
-        switch (choice){
-            case 1:
-                poll();
-                break;
-            case 2:
-                inbox();
-                break;
-            case 3:
-                other("DISCOVER");
-                break;
-            case 4:
-                other("COLLECTION INFO");
-                break;
-            case 5:
-                other("FEED INFO");
-                break;
-            case 6:
-                fullfilment();
-            case 7:
-                help();
-                break;
-            default:
-                System.out.println("Wrong choice !!");
-        }
+
+        int choice;
+        do{
+            System.out.println("=================TAXII CLIENT=================");
+            System.out.println("1.POLL \n2.INBOX \n3.DISCOVER \n4.COLLECTION INFO \n" +
+                    "5.FEED INFO \n6.FULLFILMENT \n7.HELP \n8.EXIT");
+
+            choice = sc.nextInt();
+            switch (choice){
+                case 1:
+                    poll();
+                    break;
+                case 2:
+                    inbox();
+                    break;
+                case 3:
+                    other("DISCOVER");
+                    break;
+                case 4:
+                    other("COLLECTION INFO");
+                    break;
+                case 5:
+                    other("FEED INFO");
+                    break;
+                case 6:
+                    fullfilment();
+                    break;
+                case 7:
+                    help();
+                    break;
+                case 8:
+                    break;
+                default:
+                    System.out.println("Wrong choice !!");
+            }
+        }while(choice!=8);
+
 
 
 
