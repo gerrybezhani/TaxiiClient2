@@ -1,8 +1,12 @@
 import org.mitre.taxii.client.example.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
+import java.nio.file.Path;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -84,7 +88,24 @@ public class Main {
             argsAr[i] = tmpAr.get(i);
         }
 
-        PollClient.main(argsAr);
+        try {
+             PrintStream oldstd = System.out;
+
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+
+            PrintStream out = new PrintStream(new FileOutputStream("poll@"+sdf.format(timestamp)+".xml"));
+
+
+            System.setOut(out);
+            PollClient.main(argsAr);
+            out.close();
+            System.setOut(oldstd);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -133,7 +154,7 @@ public class Main {
             tmpAr.add(dcn);
         }
 
-        System.out.println(" REQUIRED. The URL of the TAXII service provider" +
+        System.out.println(" REQUIRED. The URL of the TAXII service provider " +
                 "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
         String  url;
         do{
@@ -186,7 +207,7 @@ public class Main {
         ArrayList<String> tmpAr = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         System.out.println("=================DISCOVER=================");
-        System.out.println(" REQUIRED. The URL of the TAXII service provider" +
+        System.out.println(" REQUIRED. The URL of the TAXII service provider " +
                 "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
         String  url;
         do{
@@ -271,7 +292,7 @@ public class Main {
             tmpAr.add("-result_part_number");
             tmpAr.add(pnumber);
         }
-        System.out.println(" REQUIRED. The URL of the TAXII service provider" +
+        System.out.println(" REQUIRED. The URL of the TAXII service provider " +
                 "to connect to. (e.g http://taxiitest.mitre.org:80/service/discovery/. (optional)");
         String  url;
         do{
