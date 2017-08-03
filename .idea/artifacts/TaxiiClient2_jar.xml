@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TaxiiClient2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TaxiiClient2_jar</output-path>
+    <root id="archive" name="TaxiiClient2.jar">
+      <element id="module-output" name="TaxiiClient2" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/taxxi client/java-taxii-clients-all.jar" path-in-jar="/" />
+      <element id="file-copy" path="$USER_HOME$/Desktop/taxxi client/java-taxii-clients-all.jar" />
+    </root>
+  </artifact>
+</component>

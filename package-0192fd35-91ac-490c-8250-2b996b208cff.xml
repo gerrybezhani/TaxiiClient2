@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stix:STIX_Package
+    id="gerry:package-0192fd35-91ac-490c-8250-2b996b208cff"
+    timestamp="2017-06-07T08:16:28.542Z" version="1.2"
+    xmlns="http://xml/metadataSharing.xsd"
+    xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+    xmlns:cybox="http://cybox.mitre.org/cybox-2"
+    xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+    xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+    xmlns:gerry="gerry.ptyxiaki.it.teithe"
+    xmlns:indicator="http://stix.mitre.org/Indicator-2"
+    xmlns:stix="http://stix.mitre.org/stix-1" xmlns:stixCommon="http://stix.mitre.org/common-1">
+    <stix:STIX_Header>
+        <stix:Description>Malicious file hash</stix:Description>
+    </stix:STIX_Header>
+    <stix:Indicators>
+        <stix:Indicator
+            id="gerry:indicator-3507eae2-331a-4fa0-b724-7f52e76637d1"
+            timestamp="2017-06-07T08:16:28.542Z"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="indicator:IndicatorType">
+            <indicator:Title>Malicious MD5 file hash</indicator:Title>
+            <indicator:Description>An indicator containing a File observable with an associated hash</indicator:Description>
+            <indicator:Observable id="gerry:observable-a83b05c3-29a1-400f-bf2c-25cdf72d5c55">
+                <cybox:Object id="gerry:file-2bc606ee-6ec3-4122-a7e8-13bd041ba0ad">
+                    <cybox:Properties xsi:type="FileObj:FileObjectType">
+                        <FileObj:Hashes>
+                            <cyboxCommon:Hash>
+                                <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                <cyboxCommon:Simple_Hash_Value>bd65e0d9fe0261584a78d013c0bd7253 - </cyboxCommon:Simple_Hash_Value>
+                            </cyboxCommon:Hash>
+                        </FileObj:Hashes>
+                    </cybox:Properties>
+                </cybox:Object>
+            </indicator:Observable>
+            <indicator:Producer>
+                <stixCommon:Identity>
+                    <stixCommon:Name>The MITRE Corporation</stixCommon:Name>
+                </stixCommon:Identity>
+                <stixCommon:Time>
+                    <cyboxCommon:Produced_Time>2017-06-07T08:16:28.542Z</cyboxCommon:Produced_Time>
+                </stixCommon:Time>
+                <stixCommon:References>
+                    <stixCommon:Reference> &lt;a href="http</stixCommon:Reference>
+                </stixCommon:References>
+            </indicator:Producer>
+        </stix:Indicator>
+    </stix:Indicators>
+</stix:STIX_Package>

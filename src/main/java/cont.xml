@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stix:STIX_Package
+    id="gerry:package-0d71868f-8431-4e34-8779-813c4a52e024"
+    timestamp="2017-07-28T10:13:48.681Z" version="1.2"
+    xmlns="http://xml/metadataSharing.xsd"
+    xmlns:AddressObj="http://cybox.mitre.org/objects#AddressObject-2"
+    xmlns:FileObj="http://cybox.mitre.org/objects#FileObject-2"
+    xmlns:HostnameObj="http://cybox.mitre.org/objects#HostnameObject-1"
+    xmlns:cybox="http://cybox.mitre.org/cybox-2"
+    xmlns:cyboxCommon="http://cybox.mitre.org/common-2"
+    xmlns:cyboxVocabs="http://cybox.mitre.org/default_vocabularies-2"
+    xmlns:gerry="gerry.ptyxiaki.it.teithe"
+    xmlns:indicator="http://stix.mitre.org/Indicator-2" xmlns:stix="http://stix.mitre.org/stix-1">
+    <stix:STIX_Header>
+        <stix:Description>Malware infected host</stix:Description>
+    </stix:STIX_Header>
+    <stix:Indicators>
+        <stix:Indicator
+            id="gerry:indicator-1522bf15-2ea4-4412-b5b8-5f1121d7c380"
+            timestamp="2017-07-28T10:13:48.681Z"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="indicator:IndicatorType">
+            <indicator:Title>Malware infected host</indicator:Title>
+            <indicator:Observable>
+                <cybox:Observable_Composition operator="AND">
+                    <cybox:Observable>
+                        <cybox:Object id="gerry:observable-2a0a687c-41fb-42f4-b407-baa476db7922">
+                            <cybox:Properties category="ipv4-addr"
+                                is_source="true" xsi:type="AddressObj:AddressObjectType">
+                                <AddressObj:Address_Value> 213.58.195.45</AddressObj:Address_Value>
+                            </cybox:Properties>
+                        </cybox:Object>
+                    </cybox:Observable>
+                    <cybox:Observable id="gerry:observable-b92003c8-98e2-42c0-9558-8d3a85844cc1">
+                        <cybox:Object id="gerry:file-f16abd34-4646-4fbe-8aea-31d1779b520f">
+                            <cybox:Properties xsi:type="FileObj:FileObjectType">
+                                <FileObj:Hashes>
+                                    <cyboxCommon:Hash>
+                                    <cyboxCommon:Type xsi:type="cyboxVocabs:HashNameVocab-1.0">MD5</cyboxCommon:Type>
+                                    <cyboxCommon:Simple_Hash_Value> ed3421ff73709830c46b31188fe0d73e</cyboxCommon:Simple_Hash_Value>
+                                    </cyboxCommon:Hash>
+                                </FileObj:Hashes>
+                            </cybox:Properties>
+                        </cybox:Object>
+                    </cybox:Observable>
+                    <cybox:Observable id="gerry:observable-e8e0e4d0-1330-4dc7-9c79-fee9ef4133f9">
+                        <cybox:Object>
+                            <cybox:Properties xsi:type="HostnameObj:HostnameObjectType">
+                                <HostnameObj:Hostname_Value/>
+                            </cybox:Properties>
+                        </cybox:Object>
+                    </cybox:Observable>
+                    <cybox:Observable id="gerry:observable-4b412317-8440-4ccc-896a-8d97e5f9d71a">
+                        <cybox:Object>
+                            <cybox:Properties category="asn" xsi:type="AddressObj:AddressObjectType">
+                                <AddressObj:Address_Value> 9186</AddressObj:Address_Value>
+                            </cybox:Properties>
+                        </cybox:Object>
+                    </cybox:Observable>
+                    <cybox:Observable id="gerry:observable-852d389b-29bd-4a92-b853-1f9885106394">
+                        <cybox:Object>
+                            <cybox:Location>
+                                <cyboxCommon:Name> PT</cyboxCommon:Name>
+                            </cybox:Location>
+                        </cybox:Object>
+                    </cybox:Observable>
+                </cybox:Observable_Composition>
+            </indicator:Observable>
+        </stix:Indicator>
+    </stix:Indicators>
+</stix:STIX_Package>
