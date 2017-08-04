@@ -28,6 +28,7 @@ public class HelpClass {
         try {
             FileInputStream file = new FileInputStream(new File(fileName));
 
+            //parsing the doc in order to perform an xpath query
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
             builderFactory.setNamespaceAware(true);
 
@@ -41,14 +42,19 @@ public class HelpClass {
             XPath xPath = XPathFactory.newInstance().newXPath();
             xPath.setNamespaceContext(new main.java.NamespaceResolver(xmlDocument));
 
-            String expression = "/ns2:Poll_Response/ns2:Content_Block/ns2:Content/stix:STIX_Package";
+           // String expression = "/ns2:Poll_Response/ns2:Content_Block/ns2:Content/stix:STIX_Package";
+
+            //creating xpath query
             String expression2 = "/*//stix:STIX_Package";
             System.out.println(expression2);
             XPathExpression expr =  xPath.compile(expression2);
 
 
+            //executing the query and getting the response
             NodeList stixCont = (NodeList) expr.evaluate(xmlDocument, XPathConstants.NODESET);
 
+            //iterating throught all the contents blocks of the response and writing them to
+            //seperate files
             for (int i = 0; i < stixCont.getLength() ; i++) {
                 String content  = nodeToString(stixCont.item(i));
                 String id = getID(content);
@@ -57,6 +63,8 @@ public class HelpClass {
                 out.println(content);
                 out.close();
             }
+
+            System.out.println("Stix xml files were saved at : "+ path);
 
 
         } catch (SAXException e) {
@@ -75,6 +83,7 @@ public class HelpClass {
 
     }
 
+    //method just for debugging.It prints the document that is being parsed
     public static void printDocument(Document doc, OutputStream out) throws IOException, TransformerException {
         TransformerFactory tf = TransformerFactory.newInstance();
         Transformer transformer = tf.newTransformer();
@@ -88,6 +97,8 @@ public class HelpClass {
                 new StreamResult(new OutputStreamWriter(out, "UTF-8")));
     }
 
+
+    //Transforms a xml node to string
     private static String nodeToString(Node node)
             throws TransformerException
     {
@@ -98,6 +109,7 @@ public class HelpClass {
         return(buf.toString());
     }
 
+    //gets the id of the stix document
     private static String getID(String content)
     {
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();

@@ -1,11 +1,11 @@
 package main.java;
+import main.java.SecurityManagerPackage.CodeControl;
 import org.mitre.taxii.client.example.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,19 +98,31 @@ public class Main {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
+            //folder for the polls to be saved
             String FolderPath = "polls/poll@"+sdf.format(timestamp);
 
             File file = new File(FolderPath);
             if(!file.exists())
                 file.mkdirs();
 
+            //name of the actual file where the response is been saved
             String fileName = "polls/poll@"+sdf.format(timestamp)+"/fullresponse.xml";
 
             PrintStream out = new PrintStream(new FileOutputStream(fileName));
 
 
             System.setOut(out);
-            PollClient.main(argsAr);
+
+            CodeControl cc = new CodeControl();
+            try {
+                cc.disableSystemExit();
+                PollClient.main(argsAr);
+            }
+            finally {
+                cc.enableSystemExit();
+            }
+
+
             out.close();
             System.setOut(oldstd);
 
@@ -119,6 +131,8 @@ public class Main {
 
             if(saveToSep.equals("y") || saveToSep.equals("Y"))
                 HelpClass.saveToSeperateFiles(fileName,FolderPath);
+
+            System.out.println("Poll response was saved at: "+fileName);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

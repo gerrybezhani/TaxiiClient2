@@ -1,12 +1,12 @@
 package main.java;
 import org.w3c.dom.Document;
 
-import javax.xml.XMLConstants;
 import javax.xml.namespace.NamespaceContext;
 import java.util.Iterator;
 
 /**
  * Created by gerry on 8/2/2017.
+ * the purpose of this class is to resolve the namespace "stix" in the xml document
  */
 public class NamespaceResolver implements NamespaceContext {
 
