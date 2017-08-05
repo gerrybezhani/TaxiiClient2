@@ -1,11 +1,8 @@
 package main.java;
-import main.java.SecurityManagerPackage.CodeControl;
+import main.java.SecurityManagerPackage.SystemExitControl;
 import org.mitre.taxii.client.example.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -113,18 +110,36 @@ public class Main {
 
             System.setOut(out);
 
-            CodeControl cc = new CodeControl();
-            try {
-                cc.disableSystemExit();
-                PollClient.main(argsAr);
-            }
-            finally {
-                cc.enableSystemExit();
-            }
+            SystemExitControl.forbidSystemExitCall();
 
+            try {
+                PollClient.main(argsAr);
+            } catch (SystemExitControl.ExitTrappedException e) {
+
+            }
 
             out.close();
+
+
             System.setOut(oldstd);
+
+            //will check if any erros during the request
+            BufferedReader in = new BufferedReader(new FileReader(fileName));
+            String line = in.readLine();
+            if(!line.contains("<?xml"))
+            {
+                System.out.println(line);
+                while((line = in.readLine()) != null)
+                {
+                    System.out.println(line);
+                }
+                in.close();
+                new File(fileName).delete();
+                file.delete();
+                return;
+            }
+
+
 
             System.out.println("Do you want to save the contents in separate files?(y/n)");
             String saveToSep = sc.nextLine();
@@ -134,6 +149,8 @@ public class Main {
 
             System.out.println("Poll response was saved at: "+fileName);
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
