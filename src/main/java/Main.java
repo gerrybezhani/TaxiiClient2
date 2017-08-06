@@ -110,14 +110,20 @@ public class Main {
 
             System.setOut(out);
 
+            //disable system.out from externall API
             SystemExitControl.forbidSystemExitCall();
 
             try {
                 PollClient.main(argsAr);
             } catch (SystemExitControl.ExitTrappedException e) {
 
+            }finally {
+                //enable system.out again
+                SystemExitControl.enableSystemExitCall();
+
             }
 
+            //close the file stream
             out.close();
 
 
@@ -127,9 +133,10 @@ public class Main {
             BufferedReader in = new BufferedReader(new FileReader(fileName));
             String line = in.readLine();
             //if the firs line of the respose has the xml tag that means the request
-            //was succesfull ,otherwise it was some error
+            //was successful ,otherwise it was some error
             if(!line.contains("<?xml"))
             {
+                //8if it is a error message it print to std out
                 System.out.println(line);
                 while((line = in.readLine()) != null)
                 {
@@ -251,11 +258,14 @@ public class Main {
             argsAr[i] = tmpAr.get(i);
         }
 
-        InboxClient.main(argsAr);
+        SystemExitControl.forbidSystemExitCall();
 
-
-
-
+        try{
+            InboxClient.main(argsAr);
+        }catch (SystemExitControl.ExitTrappedException e) {}
+         finally {
+            SystemExitControl.enableSystemExitCall();
+        }
     }
 
     //method for feedinfo,discovery,collectionifno
@@ -305,18 +315,29 @@ public class Main {
         }
 
 
-        if(method.equals("DISCOVER"))
+        SystemExitControl.forbidSystemExitCall();
+
+        try{
+            if(method.equals("DISCOVER"))
+            {
+                DiscoveryClient.main(argsAr);
+            }
+            else if(method.equals("COLLECTION INFO"))
+            {
+                CollectionInformationClient.main(argsAr);
+            }
+            else if(method.equals("FEED INFO"))
+            {
+                FeedInformationClient10.main(argsAr);
+            }
+        }catch (SystemExitControl.ExitTrappedException e)
         {
-            DiscoveryClient.main(argsAr);
+
         }
-        else if(method.equals("COLLECTION INFO"))
-        {
-            CollectionInformationClient.main(argsAr);
+        finally {
+            SystemExitControl.enableSystemExitCall();
         }
-        else if(method.equals("FEED INFO"))
-        {
-            FeedInformationClient10.main(argsAr);
-        }
+
     }
 
     public static void fullfilment()
