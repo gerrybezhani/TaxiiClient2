@@ -126,6 +126,8 @@ public class Main {
             //will check if any erros during the request
             BufferedReader in = new BufferedReader(new FileReader(fileName));
             String line = in.readLine();
+            //if the firs line of the respose has the xml tag that means the request
+            //was succesfull ,otherwise it was some error
             if(!line.contains("<?xml"))
             {
                 System.out.println(line);
@@ -182,17 +184,24 @@ public class Main {
             tmpAr.add(subtype);
         }
         System.out.println("REQUIRED. File containing the\n" +
-                "content of the Content Block to send.");
+                "content of the Content Block to send.\n");
 
-        String  file;
+
+        String file;
         do{
-            file = sc.nextLine();
-        }while (file.isEmpty() );
+             file = HelpClass.selectFile();
+             if(file.equals("cancel"))
+             {
+                 System.out.println("Selection of file canceled!");
+                 return;
+             }
+        }while (file == null );
+        System.out.println("Selected file: " +file);
         tmpAr.add("-content_file");
         tmpAr.add(file);
 
 
-        System.out.println(" The Destination Collection Name for\n" +
+        System.out.println("The Destination Collection Name for\n" +
                 "this Inbox Message. Defaults to\n" +
                 "none.(optional)");
         String dcn = sc.nextLine();

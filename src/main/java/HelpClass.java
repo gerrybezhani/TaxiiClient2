@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import javax.swing.*;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -144,5 +145,30 @@ public class HelpClass {
         }
 
         return null;
+    }
+
+    public static String selectFile()
+    {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setRequestFocusEnabled(true);
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
+        int result = fileChooser.showOpenDialog(null);
+
+
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // user selects a file
+            File selectedFile = fileChooser.getSelectedFile();
+
+            return selectedFile.getAbsolutePath();
+        }
+        else if(result == JFileChooser.CANCEL_OPTION)
+        {
+            return "cancel";
+        }
+
+        return null;
+
     }
 }
